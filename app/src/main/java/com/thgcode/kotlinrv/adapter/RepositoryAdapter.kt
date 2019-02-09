@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.thgcode.kotlinrv.R
 import com.thgcode.kotlinrv.api.Repository
 import kotlinx.android.synthetic.main.repository_item.view.*
@@ -35,7 +36,9 @@ class RepositoryAdapter(
             item: Repository,
             listener: (Repository) -> Unit
         ) = with(itemView) {
-            //            ivMain.setImageDrawable(ContextCompat.getDrawable(context, item.imageResourceId))
+            Glide.with(context)
+                .load(item.owner?.avatar_url)
+                .into(ivMain)
             tvTitle.text = item.full_name ?: ""
             tvOwner.text = item.owner?.login ?: ""
             tvDescription.text = item.description ?: ""
